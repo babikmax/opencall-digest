@@ -5,11 +5,20 @@ from datetime import datetime
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/124 Safari/537.36"
 
 TELEGRAM = ["gdeart", "artopencall"]
-RSS = [("vsekonkursy.ru", "https://vsekonkursy.ru/feed")]
-# индексы-каталоги: со страницы берём ссылки по шаблону и заходим в каждую
-INDEXES = [("ewert.ru", "https://ewert.ru/opportunities/", r"https://ewert\.ru/competitions/[^\"']+")]
 
-MAX_INDEX_PAGES = 25   # сколько карточек каталога открывать за прогон
+RSS = [
+    ("vsekonkursy.ru", "https://vsekonkursy.ru/feed"),
+    ("artdeadline.com", "https://www.artdeadline.com/feed/"),
+]
+
+# индексы-каталоги: со страницы-списка берём ссылки по шаблону и заходим в каждую.
+# limit — сколько новых карточек открывать за один прогон, чтобы не разгонять счёт.
+INDEXES = [
+    ("ewert.ru", "https://ewert.ru/opportunities/",
+     r"https://ewert\.ru/competitions/[^\"']+", 25),
+    ("resartis.org", "https://resartis.org/open-calls/",
+     r"https://resartis\.org/open-call/[^\"'#]+", 20),
+]
 
 
 def get(url, timeout=25):
@@ -73,7 +82,7 @@ def from_rss(name, url, log):
     return out
 
 
-def from_index(name, url, pattern, seen_urls, log):
+def from_index(name, url, pattern, limit, seen_urls, log):
     """Каталог: собираем ссылки на карточки и открываем те, которых ещё не видели."""
     out = []
     try:
@@ -85,7 +94,7 @@ def from_index(name, url, pattern, seen_urls, log):
         u = m.group(0).rstrip("\"'")
         if u not in links:
             links.add(u); order.append(u)
-    fresh = [u for u in order if u not in seen_urls][:MAX_INDEX_PAGES]
+    fresh = [u for u in order if u not in seen_urls][:limit]
     log("index/%s — %d карточек, из них новых %d" % (name, len(order), len(fresh)))
     for u in fresh:
         try:
@@ -103,7 +112,7 @@ def collect(seen_urls, log=print):
         items += from_telegram(ch, log)
     for name, url in RSS:
         items += from_rss(name, url, log)
-    for name, url, pattern in INDEXES:
-        items += from_index(name, url, pattern, seen_urls, log)
+    for name, url, pattern, limit in INDEXES:
+        items += from_index(name, url, pattern, limit, seen_urls, log)
     log("собрано записей: %d" % len(items))
     return items
