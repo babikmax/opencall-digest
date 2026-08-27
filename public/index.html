@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Каталог опен-коллов</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Опен-коллы для художников: живопись, графика, коллаж, смешанные техники. Обновляется автоматически.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>:root{
+  --paper:#EEEFEA; --paper-2:#E5E7E0; --ink:#16181A; --ink-soft:#3D4245;
+  --muted:#6B6F6A; --rule:#D3D5CE; --pink:#D9195F; --blue:#1F4FD8;
+  --chip-pink-bg:#F9D9E5; --chip-blue-bg:#DDE4FA; --chip-off-bg:#DEDFD9;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#101214; --paper-2:#171A1C; --ink:#E9EAE4; --ink-soft:#C3C6C0;
+    --muted:#8B908A; --rule:#262A2C; --pink:#FF6B9D; --blue:#7C9BFF;
+    --chip-pink-bg:#39101F; --chip-blue-bg:#15203F; --chip-off-bg:#222628;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101214; --paper-2:#171A1C; --ink:#E9EAE4; --ink-soft:#C3C6C0;
+  --muted:#8B908A; --rule:#262A2C; --pink:#FF6B9D; --blue:#7C9BFF;
+  --chip-pink-bg:#39101F; --chip-blue-bg:#15203F; --chip-off-bg:#222628;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:'Golos Text','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:clamp(28px,5vw,64px) clamp(18px,4vw,40px) 80px}
+.eyebrow{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+.masthead{border-bottom:2px solid var(--ink);padding-bottom:24px}
+.masthead h1{font-family:'Unbounded','Golos Text',system-ui,sans-serif;font-weight:700;
+  font-size:clamp(30px,6vw,50px);line-height:1.04;letter-spacing:-.02em;margin:14px 0 0;text-wrap:balance}
+.masthead .sub{margin:16px 0 0;max-width:62ch;color:var(--ink-soft)}
+.criteria{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.06em;
+  padding:5px 9px;border-radius:2px;background:var(--chip-blue-bg);color:var(--blue)}
+.tag.no{background:var(--chip-off-bg);color:var(--muted);text-decoration:line-through}
+.stats{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:22px;
+  font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.04em;
+  color:var(--muted);font-variant-numeric:tabular-nums}
+.stats b{color:var(--ink);font-weight:500}
+
+h2.sec{font-family:'Unbounded','Golos Text',system-ui,sans-serif;font-weight:600;
+  font-size:clamp(20px,3vw,26px);letter-spacing:-.015em;margin:56px 0 0}
+.sec-note{margin:8px 0 0;color:var(--muted);font-size:14.5px;max-width:62ch}
+
+/* --- развёрнутые карточки --- */
+.item{display:grid;grid-template-columns:128px 1fr;gap:0 30px;padding:30px 0;border-bottom:1px solid var(--rule)}
+.item.first{border-top:1px solid var(--rule);margin-top:24px}
+.reg{display:flex;flex-direction:column;gap:8px;padding-top:4px}
+.reg .date{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:15px;font-weight:500;
+  color:var(--ink);font-variant-numeric:tabular-nums}
+.chip{align-self:flex-start;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:10.5px;
+  letter-spacing:.11em;text-transform:uppercase;padding:4px 8px;border-radius:2px;white-space:nowrap}
+.chip.hot{background:var(--chip-pink-bg);color:var(--pink)}
+.chip.calm{background:var(--chip-blue-bg);color:var(--blue)}
+.chip.off{background:var(--chip-off-bg);color:var(--muted)}
+.body h3{font-family:'Unbounded','Golos Text',system-ui,sans-serif;font-weight:600;
+  font-size:clamp(18px,2.3vw,21px);line-height:1.24;letter-spacing:-.015em;margin:0;text-wrap:balance}
+.org{margin:6px 0 0;font-size:14.5px;color:var(--muted)}
+.theme{margin:14px 0 0;padding-left:13px;border-left:2px solid var(--pink);font-size:14.5px;color:var(--ink-soft)}
+.theme span{display:block;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:10.5px;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.desc{margin:14px 0 0;max-width:62ch;color:var(--ink-soft)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:13px 26px;
+  margin:18px 0 0;padding:17px 19px;background:var(--paper-2);border-radius:3px}
+.meta dt{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.meta dd{margin:0;font-size:14.5px;line-height:1.5;color:var(--ink)}
+.meta .pair{min-width:0}
+.links{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:18px;align-items:center}
+a.apply{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--paper);background:var(--ink);text-decoration:none;
+  padding:10px 17px;border-radius:2px;transition:background .15s ease,color .15s ease}
+a.apply:hover,a.apply:focus-visible{background:var(--pink);color:#fff}
+a.plain{font-size:13.5px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--rule)}
+a.plain:hover,a.plain:focus-visible{color:var(--ink);border-bottom-color:var(--ink)}
+a.plain.tg::after{content:" ↗";color:var(--muted)}
+a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+
+/* --- компактные строки закрытых --- */
+.row{display:grid;grid-template-columns:128px 1fr;gap:0 30px;padding:20px 0;border-bottom:1px solid var(--rule)}
+.row.first{border-top:1px solid var(--rule);margin-top:24px}
+.row .date{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:14px;color:var(--muted);
+  font-variant-numeric:tabular-nums;padding-top:2px}
+.row h3{font-family:'Golos Text',sans-serif;font-weight:600;font-size:16.5px;line-height:1.3;margin:0}
+.row .place{font-size:13.5px;color:var(--muted);margin:3px 0 0}
+.row p{margin:8px 0 0;font-size:14.5px;color:var(--ink-soft);max-width:64ch}
+.row .tech{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:11px;color:var(--muted);
+  margin:9px 0 0;letter-spacing:.03em}
+.row .go{margin:9px 0 0}
+
+/* --- отсеянное --- */
+.report{margin-top:30px;padding:26px 28px;border:1px solid var(--rule);border-radius:3px}
+.report h3{font-family:'Unbounded','Golos Text',system-ui,sans-serif;font-weight:600;font-size:16px;margin:12px 0 0}
+.report ul{margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.report li{display:grid;grid-template-columns:26px 1fr;gap:14px;font-size:14.5px;color:var(--ink-soft)}
+.report li b{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:14px;font-weight:500;
+  color:var(--pink);font-variant-numeric:tabular-nums;text-align:right}
+.foot{margin-top:38px;padding-top:22px;border-top:1px solid var(--rule);font-size:13.5px;
+  color:var(--muted);max-width:66ch}
+
+@media (max-width:640px){
+  .item,.row{grid-template-columns:1fr;gap:14px}
+  .reg{flex-direction:row;align-items:center;flex-wrap:wrap;gap:10px;padding-top:0}
+  .meta{padding:15px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head><body>
+<div class="wrap">
+<header class="masthead">
+  <div class="eyebrow">Обновлено 28.08.2026, 01:30 МСК · Россия</div>
+  <h1>Каталог опен-коллов</h1>
+  <p class="sub">Страница пересобирается автоматически. Закрытые приёмы остаются в архиве: почти всё это ежегодные конкурсы, резиденции и ярмарки, и по ним видно, когда готовить заявку в следующий раз.</p>
+  <div class="criteria">
+    <span class="tag">живопись</span><span class="tag">графика</span>
+    <span class="tag">коллаж аналоговый и цифровой</span><span class="tag">смешанные техники</span>
+    <span class="tag no">VR</span><span class="tag no">медиаарт</span>
+  </div>
+  <div class="stats">
+    <span>Всего в каталоге <b>26</b></span>
+    <span>Приём открыт <b>10</b></span>
+    <span>Приём закрыт <b>16</b></span>
+    <span>Отсеяно <b>13</b></span>
+  </div>
+</header>
+
+<h2 class="sec">Приём заявок открыт</h2>
+<p class="sec-note">Отсортировано по дедлайну — от ближайшего.</p>
+<article class="item first">
+  <div class="reg"><div class="date">до 31.08</div><div class="chip hot">3 дня</div><div class="eyebrow">ewert.ru</div></div>
+  <div class="body">
+    <h3>Грантовая программа фонда Ruarts</h3>
+    <p class="org">Фонд Ruarts · Москва, реализация по всей России</p>
+    <div class="theme"><span>Тема</span>Свободная: выставочные, издательские, паблик-арт и образовательные проекты</div>
+    <p class="desc">Крупнейший грант в этой подборке — 500 000 ₽ на проект, который автор реализует самостоятельно в течение года. Заявка подаётся одним PDF до 10 МБ: биография, концепция, эскизы, список материалов и бюджет. Результаты — в октябре 2026.</p>
+    <dl class="meta"><div class="pair"><dt>Приём заявок</dt><dd>31 августа 2026</dd></div><div class="pair"><dt>Проведение</dt><dd>12 месяцев с момента получения гранта</dd></div><div class="pair"><dt>Кто может подать</dt><dd>российские художники, способные вести проект самостоятельно</dd></div><div class="pair"><dt>Что даёт</dt><dd>грант 500 000 ₽</dd></div><div class="pair"><dt>Контакт</dt><dd>ruartsfound@gmail.com</dd></div></dl>
+    <div class="links"><a class="apply" target="_blank" rel="noopener" href="https://ruarts.foundation/ru/grants/14">Условия и заявка</a></div>
+  </div>
+</article><article class="item">
+  <div class="reg"><div class="date">до 31.08</div><div class="chip hot">3 дня</div><div class="eyebrow">t.me/gdeart</div></div>
+  <div class="body">
+    <h3>«Боже, храни королев»</h3>
+    <p class="org">Музей Андеграунда · Екатеринбург</p>
+    <div class="theme"><span>Тема</span>Выставка-продажа в рамках одноимённого фестиваля</div>
+    <p class="desc">Опен-колл для женщин-художниц. Отбор ведёт экспертный совет музея, профильное образование не требуется, работы продаются во время выставки.</p>
+    <dl class="meta"><div class="pair"><dt>Приём заявок</dt><dd>31 августа 2026</dd></div><div class="pair"><dt>Проведение</dt><dd>сентябрь 2026, даты объявят позже</dd></div><div class="pair"><dt>Кто может подать</dt><dd>женщины-художницы, без ограничений по возрасту и образованию</dd></div><div class="pair"><dt>Техники</dt><dd>не ограничены</dd></div><div class="pair"><dt>Контакт</dt><dd>museum-ug.ekb@mail.ru +7 982 640-29-99</dd></div></dl>
+    <div class="links"><a class="apply" target="_blank" rel="noopener" href="https://ugmuseum-ekb.ru/">Условия и заявка</a><a class="plain tg" target="_blank" rel="noopener" href="https://t.me/gdeart/1792">Пост в Telegram</a></div>
+  </div>
+</article><article class="item">
+  <div class="reg"><div class="date">до 02.09</div><div class="chip hot">5 дней</div><div class="eyebrow">t.me/gdeart</div></div>
+  <div class="body">
+    <h3>Резиденция MAXART: новый набор</h3>
+    <p class="org">MAXART · Пермь</p>
+    <div class="theme"><span>Тема</span>Site-specific исследование природного, культурного и социального контекста Перми</div>
+    <p class="desc">Резиденция на 1–1,5 месяца с грантом 60 000 ₽, включающим продакшн-бюджет. Даются отдельная спальня, персональная студия, кураторская поддержка и публичная презентация. Проезд компенсируется до 10 000 ₽ в каждую сторону, доставка работ — до 5 000 ₽.</p>
+    <dl class="meta"><div class="pair"><dt>Приём заявок</dt><dd>2 сентября 2026</dd></div><div class="pair"><dt>Проведение</dt><dd>с 21 сентября 2026, 1–1,5 месяца</dd></div><div class="pair"><dt>Кто может подать</dt><dd>художники из России и СНГ от 21 года, соло или дуэтом</dd></div><div class="pair"><dt>Что даёт</dt><dd>грант 60 000 ₽, жильё, студия, проезд</dd></div></dl>
+    <div class="links"><a class="apply" target="_blank" rel="noopener" href="https://maxart-residence.tilda.ws/">Условия и заявка</a><a class="plain tg" target="_blank" rel="noopener" href="https://t.me/gdeart/1780">Пост в Telegram</a></div>
+  </div>
+</article><article class="item">
+  <div class="reg"><div class="date">до 05.09</div><div class="chip calm">8 дней</div><div class="eyebrow">t.me/gdeart</div></div>
+  <div class="body">
+    <h3>«Размышления о садах и реках»</h3>
+    <p class="org">Арт-резиденция «Открытых мастерских» · Альметьевск</p>
+    <div class="theme"><span>Тема</span>Современное исламское искусство: сад и вода в мусульманской традиции</div>
+    <p class="desc">Четыре недели в общей мастерской на 250 м² с полным пансионом. Самая обеспеченная резиденция подборки: грант 50 000 ₽ соло или до 80 000 ₽ дуэтом, плюс отдельный бюджет на материалы и исследование до 50 000 ₽. Есть кураторские консультации и поддержка исследования на татарском языке.</p>
+    <dl class="meta"><div class="pair"><dt>Приём заявок</dt><dd>5 сентября 2026</dd></div><div class="pair"><dt>Проведение</dt><dd>21 сентября — 19 октября 2026</dd></div><div class="pair"><dt>Кто может подать</dt><dd>авторы от 18 лет, живущие в России, соло или вдвоём</dd></div><div class="pair"><dt>Что даёт</dt><dd>грант до 80 000 ₽, материалы до 50 000 ₽, проживание, проезд</dd></div></dl>
+    <div class="links"><a class="apply" target="_blank" rel="noopener" href="https://novburo.ru/almetstudios/gardens-and-rivers">Условия и заявка</a></div>
+  </div>
+</article><article class="item">
+  <div class="reg"><div class="date">до 11.09</div><div class="chip calm">14 дней</div><div class="eyebrow">t.me/gdeart</div></div>
+  <div class="body">
+    <h3>Опен-колл Casimir Coffee</h3>
+    <p class="org">Casimir Coffee · Санкт-Петербург</p>
+    <div class="theme"><span>Тема</span>Пейзаж: этюды и зарисовки предосенней природы</div>
+    <p class="desc">Небольшой опен-колл на развеску в кофейне — приглашают художников живописи и графики. Формат камерный, гонорар не заявлен, но это простой способ показать работы в проходном месте.</p>
+    <dl class="meta"><div class="pair"><dt>Приём заявок</dt><dd>11 сентября 2026</dd></div><div class="pair"><dt>Проведение</dt><dd>не указано</dd></div><div class="pair"><dt>Кто может подать</dt><dd>художники без ограничений</dd></div><div class="pair"><dt>Техники</dt><dd>живопись, графика</dd></div></dl>
+    <div class="links"><a class="apply" target="_blank" rel="noopener" href="https://www.instagram.com/p/DcYXSYTgNve/?img_index=1">Условия и заявка</a></div>
+  </div>
+</article><article class="item">
+  <div class="reg"><div class="date">до 20.09</div><div class="chip calm">23 дня</div><div class="eyebrow">t.me/gdeart</div></div>
+  <div class="body">
+    <h3>Триеннале «Мифологема»: Миф о Пути Героя</h3>
+    <p class="org">Галерея МИФ · Санкт-Петербург</p>
+    <div class="theme"><span>Тема</span>Мономиф Джозефа Кэмпбелла: миф как несущая конструкция работы, а не декорация</div>
+    <p class="desc">Первый выпуск триеннале. Организаторы просят погружения в миф без дистанции: личная история и локальная традиция автора должны просачиваться в ткань работы. Кроме основной программы есть спецпроекты, симпозиумы и публичные перформансы, поэтому заявки принимают и от кураторов с исследователями.</p>
+    <dl class="meta"><div class="pair"><dt>Приём заявок</dt><dd>20 сентября 2026</dd></div><div class="pair"><dt>Проведение</dt><dd>январь — май 2027, далее раз в три года</dd></div><div class="pair"><dt>Кто может подать</dt><dd>художники, кураторы, исследователи</dd></div><div class="pair"><dt>Техники</dt><dd>не ограничены</dd></div></dl>
+    <div class="links"><a class="apply" target="_blank" rel="noopener" href="https://mythologema.org/">Условия и заявка</a><a class="plain tg" target="_blank" rel="noopener" href="https://t.me/gdeart/1785">Пост в Telegram</a></div>
+  </div>
+</article><article class="item">
+  <div class="reg"><div class="date">до 27.09</div><div class="chip calm">30 дней</div><div class="eyebrow">ewert.ru</div></div>
+  <div class="body">
+    <h3>Индивидуальная резиденция в Переделкино</h3>
+    <p class="org">Дом творчества Переделкино · Московская область</p>
+    <div class="theme"><span>Тема</span>Свободная: собственный проект в течение 21 дня</div>
+    <p class="desc">Второй осенний поток. Резиденция междисциплинарная — берут писателей, переводчиков, исследователей, а также иллюстраторов, кураторов и художников. Даются проживание, трёхразовое питание, рабочее место, библиотека и трансфер из Москвы. Взамен нужно провести одно публичное событие.</p>
+    <dl class="meta"><div class="pair"><dt>Приём заявок</dt><dd>27 сентября 2026</dd></div><div class="pair"><dt>Проведение</dt><dd>26 ноября — 16 декабря 2026</dd></div><div class="pair"><dt>Что даёт</dt><dd>проживание, питание, мастерская, трансфер</dd></div></dl>
+    <div class="links"><a class="apply" target="_blank" rel="noopener" href="https://pro-peredelkino.org/">Условия и заявка</a></div>
+  </div>
+</article><article class="item">
+  <div class="reg"><div class="date">до 01.10</div><div class="chip calm">34 дня</div><div class="eyebrow">t.me/gdeart</div></div>
+  <div class="body">
+    <h3>Выставочная программа Галереи А—Б на 2027 год</h3>
+    <p class="org">Галерея А—Б · Москва</p>
+    <div class="theme"><span>Тема</span>Групповые проекты: будущее и культурные сдвиги, экология и идентичность, партисипаторные практики, новые визуальные языки</div>
+    <p class="desc">Галерея набирает выставочные проекты на весь следующий год. Принимают на любой стадии — от концепции до готовой экспозиции, медиум не ограничен, важна внятная рамка. Параллельную программу — лекции, дискуссии, воркшопы — рассматривают отдельной заявкой. Ответ по всем заявкам обещают к 1 ноября.</p>
+    <dl class="meta"><div class="pair"><dt>Приём заявок</dt><dd>1 октября 2026</dd></div><div class="pair"><dt>Проведение</dt><dd>в течение 2027 года</dd></div><div class="pair"><dt>Кто может подать</dt><dd>кураторы, объединения и художники — только групповые проекты</dd></div><div class="pair"><dt>Контакт</dt><dd>arbuzzgallery@gmail.com</dd></div></dl>
+    <div class="links"><a class="apply" target="_blank" rel="noopener" href="https://ewert.ru/competitions/open-call-galereya-a-b-2027/">Условия и заявка</a><a class="plain tg" target="_blank" rel="noopener" href="https://t.me/gdeart/1784">Пост в Telegram</a></div>
+  </div>
+</article><article class="item">
+  <div class="reg"><div class="date">до 31.10</div><div class="chip calm">64 дня</div><div class="eyebrow">t.me/artopencall</div></div>
+  <div class="body">
+    <h3>Выставка «Связь времён»</h3>
+    <p class="org">Творческий союз профессиональных художников · Музей Марины Цветаевой, Москва</p>
+    <div class="theme"><span>Тема</span>Свободная: портрет, пейзаж, исторические сюжеты, абстракция</div>
+    <p class="desc">Традиционный формат без отбора по концепции — работы приносят лично в назначенный день. Подходит, если нужна строчка в выставочном списке и площадка в центре Москвы.</p>
+    <dl class="meta"><div class="pair"><dt>Приём заявок</dt><dd>31 октября 2026</dd></div><div class="pair"><dt>Проведение</dt><dd>Борисоглебский пер., 6, стр. 1</dd></div><div class="pair"><dt>Техники</dt><dd>живопись и графика</dd></div><div class="pair"><dt>Контакт</dt><dd>Елена Лаврова, +7 916 400-18-49</dd></div></dl>
+    <div class="links"><a class="apply" target="_blank" rel="noopener" href="https://t.me/artopencall/18">Условия и заявка</a></div>
+  </div>
+</article><article class="item">
+  <div class="reg"><div class="date">бессрочно</div><div class="chip off">без дедлайна</div><div class="eyebrow">t.me/gdeart</div></div>
+  <div class="body">
+    <h3>Open Call в «Барке»</h3>
+    <p class="org">Бар «Барка» · Москва</p>
+    <div class="theme"><span>Тема</span>Свободная, серия персональных выставок</div>
+    <p class="desc">Площадка ищет начинающих художников на серию персональных развесок. Участие безвозмездное, взамен — место, промо в соцсетях и помощь с организацией. Самый низкий порог входа в подборке и, соответственно, самая скромная отдача.</p>
+    <dl class="meta"><div class="pair"><dt>Приём заявок</dt><dd>бессрочно</dd></div><div class="pair"><dt>Кто может подать</dt><dd>начинающие художники</dd></div></dl>
+    <div class="links"><a class="apply" target="_blank" rel="noopener" href="https://www.instagram.com/p/DcQja5Lq38l/">Условия и заявка</a></div>
+  </div>
+</article>
+
+<h2 class="sec">Приём закрыт</h2>
+<p class="sec-note">Архив: ориентир по срокам на следующий сезон.</p>
+<div class="row first">
+  <div class="date">закрыт 25.08</div>
+  <div>
+    <h3>«Морфология улиц: Между нами»</h3>
+    <p class="place">Проект паблик-арта · Тюмень</p>
+    <p>Художникам предлагали исследовать то, что возникает между людьми: близость и дистанцию, общую память, чувство принадлежности. Работы задумывались как повод собраться, а не как объект в городской среде.</p>
+    <p class="tech">паблик-арт · медиум не ограничен</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://xn--80apfhcnjhdbc7l.xn--p1ai/">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 23.08</div>
+  <div>
+    <h3>«Человек — высшее существо»</h3>
+    <p class="place">Галерея «Хаос» · Краснодар</p>
+    <p>Выставка о человеческой форме — лицо, тело, пластика, фигура в пространстве. Работы принимали со всей России, экспозиция идёт с 29 августа по 11 сентября 2026.</p>
+    <p class="tech">живопись · графика · фотография · скульптура</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://www.instagram.com/p/DbvETRNO8g2/">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 16.08</div>
+  <div>
+    <h3>XIII ярмарка новых имён ВИН-ВИН</h3>
+    <p class="place">Центр современного искусства «Винзавод» · Москва</p>
+    <p>Ярмарка с принципиальной установкой: не меньше половины стендов достаётся авторам без опыта участия. Превью 9 октября, публичные дни 10–11 октября 2026. Подавать могут и галереи, и независимые художники.</p>
+    <p class="tech">медиум не ограничен · стенд</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://winzavod.ru/">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 15.08</div>
+  <div>
+    <h3>«Точка Кюри»: «Переход»</h3>
+    <p class="place">Кураторский проект современного искусства · Старый Оскол</p>
+    <p>Тема — состояние перехода: момент, когда прежний порядок перестаёт существовать и рождается новая форма. Метафора взята из физики, где точка Кюри — температура смены магнитных свойств вещества.</p>
+    <p class="tech">современное искусство · медиум не ограничен</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://cuire-fest.ru/opencall/">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 10.08</div>
+  <div>
+    <h3>Опен-колл на Куб.Маркет</h3>
+    <p class="place">Cube.Market · онлайн-платформа</p>
+    <p>Не выставка, а подключение к торговой площадке: личная страница автора, каталог работ через кабинет, продвижение через рекламу и соцсети. Комиссия платформы 31,5%, нужен статус самозанятого или ИП. Отбор до 10 сентября, отвечают только выбранным.</p>
+    <p class="tech">любые медиумы · продажа работ</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://cube.market/">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 10.08</div>
+  <div>
+    <h3>NEXT 3.0 — набор резидентов</h3>
+    <p class="place">Галерея БИС АРТ · Москва</p>
+    <p>Программа поддержки молодых авторов, работающих в направлении метамодерна: выставочная практика, участие в проектах галереи, материальная и техническая помощь, кураторское сопровождение и медиаподдержка.</p>
+    <p class="tech">медиум не ограничен · метамодерн</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://www.bisartgallery.art/next-3-0-open-call/">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 10.08</div>
+  <div>
+    <h3>«Архитектура эмоций»</h3>
+    <p class="place">Галерея «НАПРОТИВ» и гастромаркет «Домком» · Москва</p>
+    <p>Выставка о взаимодействии человека и городской архитектуры в здании конструктивизма 1930-х годов.</p>
+    <p class="tech">современное искусство · медиум не ограничен</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://www.instagram.com/p/DbYE9vssnFe/">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 04.08</div>
+  <div>
+    <h3>«# Нужно время»</h3>
+    <p class="place">ЦТИ «Фабрика» · Москва</p>
+    <p>Проект кураторов Ирины Сафоновой и Евдокии Дергилёвой, продолжение выставки «Стадия: коробка». Искали авторов на новый совместный проект.</p>
+    <p class="tech">современное искусство · медиум не ограничен</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://vk.ru/wall-70448901_2658">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 01.08</div>
+  <div>
+    <h3>Красненькая антибиеннале 2026</h3>
+    <p class="place">Берег реки Красненькой · Санкт-Петербург</p>
+    <p>Site-specific проект под открытым небом, тема — «Волка ноги кормят»: двойственность причин, ходьба как способ думать, еда и пропитание. Событие прошло 29–30 августа, участники попадают в «Книгу Красненькой». Требование к медиуму одно — бесконфликтность по отношению к территории.</p>
+    <p class="tech">site-specific · все дисциплины</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://wall-online.ru/krasnenkaya-2026">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 19.07</div>
+  <div>
+    <h3>Конкурс HSE ART GALLERY «Глобальный город»</h3>
+    <p class="place">HSE ART GALLERY · Москва</p>
+    <p>Город как пространство высокой интенсивности, где сходятся технологии, архитектура и повседневность. Двенадцать смысловых блоков на выбор — от инфраструктуры до альтернативных городов. Без возрастных ограничений, принимали и готовые работы, и проработанные эскизные проекты. Выставка — осенью 2026 на двух площадках в центре Москвы.</p>
+    <p class="tech">любой медиум · работы и эскизные проекты</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://art.hse.ru/gallery/global_city">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 01.07</div>
+  <div>
+    <h3>Open Call для русскоязычных художников за рубежом</h3>
+    <p class="place">Галерея «сцена/szena» и Badlon Magazine · Москва и Париж</p>
+    <p>Для авторов, которые сейчас живут и работают за пределами России. Итог — групповые выставки в Москве и Париже и публикация в Badlon Magazine.</p>
+    <p class="tech">живопись · графика · скульптура · инсталляция · цифровое искусство</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://szena-gallery.com/open-call/">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 30.06</div>
+  <div>
+    <h3>Вторая ярмарка актуального искусства ARS</h3>
+    <p class="place">Санкт-Петербург</p>
+    <p>Ярмарка для галерей, объединений и независимых художников до 40 лет. Прошла 20–23 августа 2026.</p>
+    <p class="tech">живопись · графика · скульптура · фотография · инсталляция</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://ewert.ru/competitions/vtoraya-yarmarka-aktualnogo-iskusstva-ars-sankt-peterburg/">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 24.06</div>
+  <div>
+    <h3>Выставка «Притяжения больше нет»</h3>
+    <p class="place">Проект «ОСЬ» · Санкт-Петербург</p>
+    <p>Первая выставка новой площадки, куратор Надежда Месхия. Тема — внутренняя трансформация как долгий нелинейный путь: момент, когда прежняя опора уже сдвинулась, а новая ещё не появилась.</p>
+    <p class="tech">живопись · графика · скульптура · инсталляция · видео · перформанс</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://ewert.ru/competitions/vystavka-prityazheniya-bolshe-net-open-call/">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 21.06</div>
+  <div>
+    <h3>Резиденция «Нить»</h3>
+    <p class="place">Тверь</p>
+    <p>Работа с текстильными ремёслами Тверской области — ткачество, набойка, золотное шитьё — вместе с местными мастерами. Задача резиденции: перевести наследие ремесла в современную художественную практику. Прямое попадание для смешанных техник.</p>
+    <p class="tech">текстиль · ткачество · набойка · золотное шитьё</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://therails.cc/threadresidence">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 21.06</div>
+  <div>
+    <h3>Арт-резиденция в Зарайске 2026</h3>
+    <p class="place">Зарайск · Московская область</p>
+    <p>Тема — «Русский Восток: сквозь время и шёлк». Гонорар 50 000 ₽ на материалы и продакшн, оплата дороги, индивидуальная студия с проживанием, кураторская поддержка. Взамен — мастер-класс для местных жителей и новая работа для итоговой выставки. Резиденция прошла 7 июля — 8 августа 2026.</p>
+    <p class="tech">медиум не ограничен · 18+</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://zaraysk-art.ru/">Страница организатора</a></p>
+  </div>
+</div><div class="row">
+  <div class="date">закрыт 14.06</div>
+  <div>
+    <h3>THIRD PLACE ART FAIR 2026</h3>
+    <p class="place">Культурное пространство «Третье место» · Санкт-Петербург</p>
+    <p>Ярмарка в историческом особняке на Литейном, 62. Тема — «Поле колеблющихся смыслов». Экспертный совет из коллекционеров, кураторов и искусствоведов. Прошла 27–30 августа 2026.</p>
+    <p class="tech">живопись · графика · керамика · скульптура · фотография</p>
+    <p class="go"><a class="plain" target="_blank" rel="noopener" href="https://third.place/thirdplaceartfair-2026">Страница организатора</a></p>
+  </div>
+</div>
+
+<h2 class="sec">Отсеяно</h2>
+<section class="report">
+  <div class="eyebrow">Не прошло фильтр</div>
+  <h3>Всего 13 записей</h3>
+  <ul><li><b>7</b><span>не про искусство</span></li><li><b>4</b><span>медиум исключён</span></li><li><b>1</b><span>реклама</span></li><li><b>1</b><span>нет приёма заявок</span></li></ul>
+</section>
+
+<p class="foot">Источники: телеграм-каналы «Где выставка» и «Арт опен-коллы», RSS агрегатора vsekonkursy.ru, каталог ewert.ru и сайты организаторов. Условия и суммы уточняйте на странице организатора. Страница обновлена 28.08.2026, 01:30 МСК.</p>
+</div>
+</body></html>

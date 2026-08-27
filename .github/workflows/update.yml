@@ -1,0 +1,55 @@
+name: Обновить каталог
+
+on:
+  schedule:
+    - cron: "0 6 * * *"     # каждый день в 09:00 МСК
+  workflow_dispatch:         # и кнопка «запустить сейчас» во вкладке Actions
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install anthropic
+
+      - name: Собрать каталог
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python generate.py
+
+      - name: Сохранить архив в репозиторий
+        run: |
+          git config user.name "opencall-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/items.json public/index.html
+          git diff --staged --quiet || git commit -m "каталог за $(TZ=Europe/Moscow date +%d.%m.%Y)"
+          git push
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
