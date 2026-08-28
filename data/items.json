@@ -66,6 +66,28 @@
    "title": "Printed Matter Publisher Work Grant",
    "who": "независимые издатели книг художника"
   },
+  "https://artdeadline.com/ops/vcssu": {
+   "apply_url": "https://artdeadline.com/ops/vcssu/",
+   "city": "Valley City",
+   "contact": "",
+   "country": "США",
+   "country_code": "US",
+   "deadline": "",
+   "first_seen": "2026-08-28",
+   "org": "Valley City State University, Robinson Center for the Arts Gallery",
+   "period": "2026-2029",
+   "provides": "Выставка в галерее университета",
+   "region": "Северная Америка",
+   "ru_access": "с оговорками",
+   "ru_note": "нужна отправка работ или выезд в США",
+   "source": "artdeadline.com",
+   "source_url": "https://artdeadline.com/ops/vcssu/",
+   "summary": "Галерея университета Valley City State принимает заявки на персональные и групповые выставки, а также независимые кураторские проекты на 2026-29 учебные годы. Принимаются работы в любых медиа и стилях. Отбор идёт до заполнения программы.",
+   "techniques": "Все медиа и стили",
+   "theme": "Выставочные проекты во всех медиа и стилях",
+   "title": "VCSU Robinson Center for the Arts: Call for Exhibition Proposals 2026-29",
+   "who": "Художники и независимые куратоы"
+  },
   "https://bisartgallery.art/next-3-0-open-call": {
    "apply_url": "https://www.bisartgallery.art/next-3-0-open-call/",
    "city": "Москва",
@@ -992,7 +1014,7 @@
    "title": "Резиденция Casa na Ilha на острове Илья-Бела",
    "who": "художники всех дисциплин"
   },
-  "https://resartis.org/open-call/in-simplicitate-libertas-1-week-unesco-site-discovery/": {
+  "https://resartis.org/open-call/in-simplicitate-libertas-1-week-unesco-site-discovery": {
    "apply_url": "https://resartis.org/open-call/in-simplicitate-libertas-1-week-unesco-site-discovery/",
    "city": "",
    "contact": "",
