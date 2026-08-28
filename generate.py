@@ -160,6 +160,54 @@ def item_fingerprint(item):
             norm_text(item.get("title")))
 
 
+GENERIC_TITLE_WORDS = {
+    "open", "call", "opencall", "опен", "колл", "опенколл", "для", "на", "в",
+    "и", "от", "до", "год", "года", "2026", "2027", "арт", "art", "artist",
+    "artists", "художник", "художники", "художников", "международный",
+    "international", "конкурс", "contest", "программа", "program", "programme",
+    "выставка", "exhibition", "резиденция", "residency", "набор", "проект",
+    "современное", "современного", "искусство", "искусства", "contemporary",
+    "gallery", "галерея", "галерее",
+}
+
+
+def distinctive_title_words(title):
+    return {w for w in norm_text(title).split()
+            if w not in GENERIC_TITLE_WORDS and (len(w) >= 4 or any(c.isdigit() for c in w))}
+
+
+def same_title_identity(title_a, title_b):
+    """Сопоставляет устойчивое имя проекта внутри длинных редакторских заголовков."""
+    a, b = norm_text(title_a), norm_text(title_b)
+    if not a or not b:
+        return False
+    common = distinctive_title_words(a) & distinctive_title_words(b)
+    if a == b:
+        return len(a) >= 6 and bool(common)
+    # Редкое длинное имя проекта («Мифологема») устойчивее редакторского обрамления.
+    if any(len(word) >= 8 for word in common):
+        return True
+    shorter, longer = sorted((a, b), key=len)
+    # «Резиденция Нить (Тверь)» и «Резиденция Нить»; NEXT 3.0 и его длинная версия.
+    if len(shorter) >= 8 and shorter in longer and common:
+        return True
+    wa, wb = set(a.split()), set(b.split())
+    containment = len(wa & wb) / min(len(wa), len(wb))
+    similarity = SequenceMatcher(None, a, b).ratio()
+    return bool(common) and (containment >= 0.80 or similarity >= 0.82)
+
+
+def same_org_identity(org_a, org_b):
+    a, b = norm_text(org_a), norm_text(org_b)
+    if not a or not b:
+        return False
+    if a == b:
+        return True
+    wa, wb = set(a.split()), set(b.split())
+    containment = len(wa & wb) / min(len(wa), len(wb))
+    return containment >= 0.75 or SequenceMatcher(None, a, b).ratio() >= 0.88
+
+
 def same_event(a, b):
     """Консервативно определяет один и тот же опен-колл в разных источниках."""
     urls_a = {canonical_url(a.get("source_url")), canonical_url(a.get("apply_url"))}
@@ -172,11 +220,28 @@ def same_event(a, b):
 
     org_a, deadline_a, title_a = item_fingerprint(a)
     org_b, deadline_b, title_b = item_fingerprint(b)
-    if not deadline_a or deadline_a != deadline_b or not org_a or not org_b:
+    # Точное название + тот же организатор: ловит карточки без даты («Барка»)
+    # и разные этапы одного конкурса в одном году (HSE: 1 и 19 июля 2026).
+    exact_title = title_a == title_b and bool(distinctive_title_words(title_a))
+    if exact_title and same_org_identity(org_a, org_b):
+        if not deadline_a or not deadline_b:
+            return True
+        if deadline_a[:4] == deadline_b[:4]:
+            try:
+                return abs((date.fromisoformat(deadline_a) -
+                            date.fromisoformat(deadline_b)).days) <= 21
+            except ValueError:
+                return False
+    if not deadline_a or deadline_a != deadline_b:
+        return False
+    if same_title_identity(title_a, title_b):
+        return True
+    if not org_a or not org_b:
         return False
     org_sim = SequenceMatcher(None, org_a, org_b).ratio()
     title_sim = SequenceMatcher(None, title_a, title_b).ratio()
-    return org_sim >= 0.88 and title_sim >= 0.72
+    common = distinctive_title_words(title_a) & distinctive_title_words(title_b)
+    return bool(common) and org_sim >= 0.88 and title_sim >= 0.72
 
 
 def url_quality(url):
@@ -220,17 +285,44 @@ def merge_items(a, b):
 
 def deduplicate_store(store):
     """Объединяет накопленные дубли и возвращает число удалённых карточек."""
-    unique = []
-    removed = 0
+    original = []
     for key, item in store["items"].items():
         item = dict(item)
         item.setdefault("source_url", key)
-        hit = next((i for i, existing in enumerate(unique) if same_event(existing, item)), None)
-        if hit is None:
-            unique.append(item)
-        else:
-            unique[hit] = merge_items(unique[hit], item)
+        original.append(item)
+
+    # Связные компоненты сохраняют транзитивность: короткое «NEXT 3.0» связывает
+    # две длинные версии, даже если длинные заголовки напрямую не похожи.
+    parent = list(range(len(original)))
+
+    def find(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    def union(i, j):
+        ri, rj = find(i), find(j)
+        if ri != rj:
+            parent[rj] = ri
+
+    for i in range(len(original)):
+        for j in range(i + 1, len(original)):
+            if same_event(original[i], original[j]):
+                union(i, j)
+
+    groups = {}
+    for i, item in enumerate(original):
+        groups.setdefault(find(i), []).append(item)
+
+    unique = []
+    removed = 0
+    for group in groups.values():
+        merged = group[0]
+        for item in group[1:]:
+            merged = merge_items(merged, item)
             removed += 1
+        unique.append(merged)
 
     rebuilt = {}
     for item in unique:
@@ -262,6 +354,7 @@ def enrich(raw, model=MODEL):
     for start in range(0, len(raw), BATCH):
         chunk = raw[start:start + BATCH]
         payload = [{"id": i, "source": it["source"], "url": it["source_url"],
+                    "candidate_apply_url": it.get("apply_url") or "",
                     "text": it["text"][:3500]} for i, it in enumerate(chunk)]
         resp = client.messages.create(
             model=model, max_tokens=16000, system=SYSTEM,
@@ -559,7 +652,8 @@ def main():
                     continue
                 store["items"][url] = {
                     "source": src["source"], "source_url": url,
-                    "apply_url": p["apply_url"] or src.get("apply_url") or url,
+                    "apply_url": max((p["apply_url"], src.get("apply_url") or "", url),
+                                     key=url_quality),
                     "title": p["title"] or src["title"], "org": p["org"], "city": p["city"],
                     "theme": p["theme"], "summary": p["summary"], "deadline": p["deadline"],
                     "period": p["period"], "who": p["who"], "techniques": p["techniques"],
