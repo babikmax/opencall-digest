@@ -11,6 +11,8 @@
 """
 import html as H
 import json, os, re, sys
+from difflib import SequenceMatcher
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 from datetime import date, datetime, timezone, timedelta
 
 import collect
@@ -121,6 +123,133 @@ def save_store(store):
     os.makedirs(os.path.dirname(STORE), exist_ok=True)
     with open(STORE, "w", encoding="utf-8") as f:
         json.dump(store, f, ensure_ascii=False, indent=1, sort_keys=True)
+
+
+# ---------------------------------------------------------------- дедупликация
+AGGREGATOR_HOSTS = {
+    "ewert.ru", "vsekonkursy.ru", "artdeadline.com", "resartis.org",
+    "t.me", "telegram.me",
+}
+
+
+def canonical_url(url):
+    """Нормализует URL, не смешивая разные страницы одного сайта."""
+    if not url:
+        return ""
+    try:
+        p = urlsplit(url.strip())
+    except ValueError:
+        return url.strip()
+    host = p.netloc.lower().removeprefix("www.")
+    path = re.sub(r"/+", "/", p.path).rstrip("/") or "/"
+    query = urlencode([(k, v) for k, v in parse_qsl(p.query, keep_blank_values=True)
+                       if not k.lower().startswith("utm_") and k.lower() not in
+                       {"fbclid", "gclid", "yclid"}])
+    return urlunsplit(("https", host, path, query, ""))
+
+
+def norm_text(value):
+    value = (value or "").casefold().replace("ё", "е")
+    value = re.sub(r"[^a-zа-я0-9]+", " ", value)
+    return " ".join(value.split())
+
+
+def item_fingerprint(item):
+    """Стабильные признаки события, независимые от источника и формулировки."""
+    return (norm_text(item.get("org")), item.get("deadline") or "",
+            norm_text(item.get("title")))
+
+
+def same_event(a, b):
+    """Консервативно определяет один и тот же опен-колл в разных источниках."""
+    urls_a = {canonical_url(a.get("source_url")), canonical_url(a.get("apply_url"))}
+    urls_a.update(canonical_url(u) for u in a.get("aliases", []))
+    urls_b = {canonical_url(b.get("source_url")), canonical_url(b.get("apply_url"))}
+    urls_b.update(canonical_url(u) for u in b.get("aliases", []))
+    urls_a.discard(""); urls_b.discard("")
+    if urls_a & urls_b:
+        return True
+
+    org_a, deadline_a, title_a = item_fingerprint(a)
+    org_b, deadline_b, title_b = item_fingerprint(b)
+    if not deadline_a or deadline_a != deadline_b or not org_a or not org_b:
+        return False
+    org_sim = SequenceMatcher(None, org_a, org_b).ratio()
+    title_sim = SequenceMatcher(None, title_a, title_b).ratio()
+    return org_sim >= 0.88 and title_sim >= 0.72
+
+
+def url_quality(url):
+    """Официальная страница ценнее карточки агрегатора или поста в Telegram."""
+    if not url:
+        return -1
+    try:
+        host = urlsplit(url).netloc.lower().removeprefix("www.")
+    except ValueError:
+        return 0
+    return 0 if host in AGGREGATOR_HOSTS else 2
+
+
+def merge_items(a, b):
+    """Сливает карточки, сохраняя лучший текст, официальный URL и все алиасы."""
+    official = max((a.get("apply_url", ""), b.get("apply_url", "")), key=url_quality)
+    fields = ("summary", "theme", "period", "who", "techniques", "provides", "contact")
+    richer = max((a, b), key=lambda x: sum(len(str(x.get(k, ""))) for k in fields))
+    other = b if richer is a else a
+    merged = dict(other)
+    merged.update(richer)
+    for key in ("org", "city", "country", "country_code", "region", "deadline",
+                "period", "who", "techniques", "provides", "contact", "ru_note"):
+        if not merged.get(key):
+            merged[key] = other.get(key, "")
+    if official:
+        merged["apply_url"] = official
+    aliases = set(a.get("aliases", [])) | set(b.get("aliases", []))
+    aliases.update(u for u in (a.get("source_url"), b.get("source_url"),
+                               a.get("apply_url"), b.get("apply_url")) if u)
+    merged["aliases"] = sorted(aliases)
+    dates = [x for x in (a.get("first_seen"), b.get("first_seen")) if x]
+    if dates:
+        merged["first_seen"] = min(dates)
+    sources = set(a.get("sources", [])) | set(b.get("sources", []))
+    sources.update(x for x in (a.get("source"), b.get("source")) if x)
+    merged["sources"] = sorted(sources)
+    merged["source"] = " + ".join(merged["sources"])
+    return merged
+
+
+def deduplicate_store(store):
+    """Объединяет накопленные дубли и возвращает число удалённых карточек."""
+    unique = []
+    removed = 0
+    for key, item in store["items"].items():
+        item = dict(item)
+        item.setdefault("source_url", key)
+        hit = next((i for i, existing in enumerate(unique) if same_event(existing, item)), None)
+        if hit is None:
+            unique.append(item)
+        else:
+            unique[hit] = merge_items(unique[hit], item)
+            removed += 1
+
+    rebuilt = {}
+    for item in unique:
+        key = canonical_url(item.get("apply_url")) or canonical_url(item.get("source_url"))
+        if key in rebuilt:
+            rebuilt[key] = merge_items(rebuilt[key], item)
+            removed += 1
+        else:
+            rebuilt[key] = item
+    store["items"] = rebuilt
+    return removed
+
+
+def all_seen_urls(store):
+    seen = set(store["items"]) | set(store["rejected"])
+    for item in store["items"].values():
+        seen.update(item.get("aliases", []))
+        seen.update(u for u in (item.get("source_url"), item.get("apply_url")) if u)
+    return seen
 
 
 # ---------------------------------------------------------------- Claude
@@ -401,7 +530,11 @@ def main():
     dry = "--dry" in sys.argv
     skip_llm = "--no-llm" in sys.argv
     store = load_store()
-    seen = set(store["items"]) | set(store["rejected"])
+    removed = deduplicate_store(store)
+    if removed:
+        save_store(store)
+        log("объединено дублей в архиве: %d" % removed)
+    seen = all_seen_urls(store)
 
     if not skip_llm and not os.environ.get("ANTHROPIC_API_KEY"):
         log("ANTHROPIC_API_KEY не задан — пропускаю сбор, пересобираю страницу из архива")
@@ -436,6 +569,9 @@ def main():
                     "first_seen": store["items"].get(url, {}).get(
                         "first_seen", date.today().isoformat()),
                 }
+            removed = deduplicate_store(store)
+            if removed:
+                log("объединено новых дублей: %d" % removed)
             save_store(store)
             log("в каталоге: %d, отсеяно всего: %d" % (len(store["items"]), len(store["rejected"])))
 

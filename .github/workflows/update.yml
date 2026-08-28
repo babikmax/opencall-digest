@@ -26,6 +26,9 @@ jobs:
 
       - run: pip install anthropic
 
+      - name: Проверить дедупликацию
+        run: python -m unittest discover -s tests -v
+
       - name: Собрать каталог
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
