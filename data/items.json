@@ -338,6 +338,28 @@
    "title": "VCSU Robinson Center for the Arts: Call for Exhibition Proposals 2026-29",
    "who": "Художники и независимые куратоы"
   },
+  "https://artdeadline.com/ops/yosemite": {
+   "apply_url": "https://artdeadline.com/ops/yosemite/",
+   "city": "",
+   "contact": "",
+   "country": "США",
+   "country_code": "US",
+   "deadline": "2026-12-21",
+   "first_seen": "2026-09-15",
+   "org": "Yosemite Renaissance",
+   "period": "",
+   "provides": "Денежные награды, экспонирование и продажа работ",
+   "region": "Северная Америка",
+   "ru_access": "с оговорками",
+   "ru_note": "нужна отправка работ в США и вероятный взнос в валюте",
+   "source": "artdeadline.com",
+   "source_url": "https://artdeadline.com/ops/yosemite/",
+   "summary": "Ежегодная конкурсная выставка для художников, вдохновлённых природой Йосемити и региона Сьерра-Невада. Работы демонстрируются на нескольких площадках с возможностью продажи. Предусмотрены крупные денежные награды.",
+   "techniques": "Без строгих ограничений по медиуму",
+   "theme": "Искусство, вдохновлённое Йосемити и Сьерра-Невадой",
+   "title": "Yosemite Renaissance 42",
+   "who": "Художники, международный приём"
+  },
   "https://bisartgallery.art/next-3-0-open-call": {
    "aliases": [
     "https://ewert.ru/competitions/next-3-0-open-call-galerei-bis-art/",
@@ -5286,9 +5308,11 @@
   }
  },
  "rejected": {
+  "https://artdeadline.com/ops/aan/": "недоступно из России",
   "https://artdeadline.com/ops/arc/": "медиум исключён",
   "https://artdeadline.com/ops/artlink/": "недоступно из России",
   "https://artdeadline.com/ops/artlnk/": "недоступно из России",
+  "https://artdeadline.com/ops/black-box/": "медиум исключён",
   "https://artdeadline.com/ops/black-eyes/": "медиум исключён",
   "https://artdeadline.com/ops/buckham-gallery/": "недоступно из России",
   "https://artdeadline.com/ops/desea/": "медиум исключён",
@@ -5299,6 +5323,7 @@
   "https://artdeadline.com/ops/rphoto/": "медиум исключён",
   "https://artdeadline.com/ops/smith-grant/": "медиум исключён",
   "https://artdeadline.com/ops/texas-am/": "недоступно из России",
+  "https://artdeadline.com/ops/the-artadia-awards/": "недоступно из России",
   "https://artdeadline.com/ops/virga/": "нет приёма заявок",
   "https://artdeadline.com/ops/wmg/": "недоступно из России",
   "https://artdeadline.com/ops/yavapai/": "недоступно из России",
