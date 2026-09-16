@@ -250,6 +250,28 @@
    "title": "MFA: Small Wonders 2026",
    "who": "Художники, международный приём"
   },
+  "https://artdeadline.com/ops/new-york-percent-for-art": {
+   "apply_url": "https://artdeadline.com/ops/new-york-percent-for-art/",
+   "city": "Нью-Йорк",
+   "contact": "",
+   "country": "США",
+   "country_code": "US",
+   "deadline": "",
+   "first_seen": "2026-09-16",
+   "org": "NYC Department of Cultural Affairs",
+   "period": "",
+   "provides": "возможность получить заказ на произведение",
+   "region": "Северная Америка",
+   "ru_access": "уточнить",
+   "ru_note": "условия участия для зарубежных авторов не указаны",
+   "source": "artdeadline.com",
+   "source_url": "https://artdeadline.com/ops/new-york-percent-for-art/",
+   "summary": "Каталог художников программы Percent for Art департамента культуры Нью-Йорка, по которому распределяются заказы на публичное искусство. Приём заявок постоянный.",
+   "techniques": "без ограничений по медиуму",
+   "theme": "Паблик-арт и заказы на произведения для городских объектов",
+   "title": "Percent for Art Artist Directory, Нью-Йорк",
+   "who": "художники"
+  },
   "https://artdeadline.com/ops/pleinair": {
    "apply_url": "https://artdeadline.com/ops/pleinair/",
    "city": "",
@@ -549,6 +571,50 @@
    "theme": "Свободная: месяц работы в мастерской в центре Мехико",
    "title": "Осенняя резиденция Estudio Chapulín",
    "who": "визуальные художники"
+  },
+  "https://ewert.ru/competitions/13-j-sezon-art-rezidenczii-maxart-sovmestno-s-muzeem-permm-perm": {
+   "apply_url": "https://ewert.ru/competitions/13-j-sezon-art-rezidenczii-maxart-sovmestno-s-muzeem-permm-perm/",
+   "city": "Пермь",
+   "contact": "",
+   "country": "Россия",
+   "country_code": "RU",
+   "deadline": "2026-10-14",
+   "first_seen": "2026-09-16",
+   "org": "Фонд MaxArt и музей PERMM",
+   "period": "9 ноября — 20 декабря 2026",
+   "provides": "грант 60 000 руб., оплата проезда до 10 000 руб., мастерские, кураторская поддержка, выставка",
+   "region": "Россия и СНГ",
+   "ru_access": "открыт",
+   "ru_note": "приём для авторов из России и СНГ",
+   "source": "ewert.ru",
+   "source_url": "https://ewert.ru/competitions/13-j-sezon-art-rezidenczii-maxart-sovmestno-s-muzeem-permm-perm/",
+   "summary": "Полтора месяца работы в мастерских исторического особняка XIX века с грантом 60 000 рублей, экспедициями по промышленным объектам и итоговой выставкой в музее PERMM. Заявки от художников из России и СНГ от 21 года, включая коллективы до двух человек.",
+   "techniques": "современное искусство, без ограничений по медиуму",
+   "theme": "Индустриальное наследие Пермского края",
+   "title": "13-й сезон арт-резиденции MaxArt совместно с музеем PERMM",
+   "who": "художники и коллективы до 2 человек из России и СНГ от 21 года"
+  },
+  "https://ewert.ru/competitions/desyatyj-czikl-programmy-hudozhestvennyh-rezidenczij-ges-2": {
+   "apply_url": "https://ewert.ru/competitions/desyatyj-czikl-programmy-hudozhestvennyh-rezidenczij-ges-2/",
+   "city": "Москва",
+   "contact": "",
+   "country": "Россия",
+   "country_code": "RU",
+   "deadline": "2026-12-13",
+   "first_seen": "2026-09-16",
+   "org": "Дом культуры «ГЭС-2»",
+   "period": "март—май или июнь—август 2027",
+   "provides": "гонорар, проживание, проезд, производственный бюджет, доступ в мастерские",
+   "region": "Россия и СНГ",
+   "ru_access": "открыт",
+   "ru_note": "только для граждан РФ вне Москвы и области",
+   "source": "ewert.ru",
+   "source_url": "https://ewert.ru/competitions/desyatyj-czikl-programmy-hudozhestvennyh-rezidenczij-ges-2/",
+   "summary": "Резиденция 75–90 дней в Москве весной или летом 2027 года с гонораром, проживанием в отдельной студии, оплатой дороги и материалов. Для граждан РФ старше 18 лет, живущих за пределами Москвы и области.",
+   "techniques": "визуальное искусство на стыке медиа, паблик-арт, перформанс, звук",
+   "theme": "Междисциплинарные авторские проекты, паблик-арт",
+   "title": "Десятый цикл Программы художественных резиденций «ГЭС-2»",
+   "who": "художники, архитекторы, саунд-артисты, хореографы, режиссёры"
   },
   "https://ewert.ru/competitions/open-call-galereya-a-b-2027": {
    "aliases": [
@@ -892,6 +958,11 @@
    "who": "художники всех дисциплин, без ограничений по гражданству"
   },
   "https://maxart-residence.tilda.ws/": {
+   "aliases": [
+    "https://maxart-residence.tilda.ws/",
+    "https://t.me/gdeart/1780",
+    "https://t.me/gdeart/1805"
+   ],
    "apply_url": "https://maxart-residence.tilda.ws/",
    "city": "Пермь",
    "contact": "",
@@ -907,6 +978,9 @@
    "ru_note": "российский организатор",
    "source": "t.me/gdeart",
    "source_url": "https://t.me/gdeart/1780",
+   "sources": [
+    "t.me/gdeart"
+   ],
    "summary": "Резиденция на 1–1,5 месяца с грантом 60 000 ₽, включающим продакшн-бюджет. Даются отдельная спальня, персональная студия, кураторская поддержка и публичная презентация. Проезд компенсируется до 10 000 ₽ в каждую сторону, доставка работ — до 5 000 ₽.",
    "techniques": "",
    "theme": "Site-specific исследование природного, культурного и социального контекста Перми",
@@ -4921,6 +4995,10 @@
    "who": "художники"
   },
   "https://t.me/gdeart/1802": {
+   "aliases": [
+    "https://ewert.ru/competitions/rezidencziya-pesochnicza-v-biblioteke-shkaf-sankt-peterburg/",
+    "https://t.me/gdeart/1802"
+   ],
    "apply_url": "https://t.me/gdeart/1802",
    "city": "Санкт-Петербург",
    "contact": "",
@@ -4929,18 +5007,22 @@
    "deadline": "2026-09-17",
    "first_seen": "2026-09-10",
    "org": "Библиотека и арт-резиденция «ШКАФ»",
-   "period": "2 месяца",
-   "provides": "резиденция",
+   "period": "1 октября — декабрь 2026",
+   "provides": "площадка, кураторское сопровождение, выставка, образовательная программа",
    "region": "Россия и СНГ",
-   "ru_access": "открыт",
-   "ru_note": "российский организатор",
-   "source": "t.me/gdeart",
-   "source_url": "https://t.me/gdeart/1802",
-   "summary": "Двухмесячная резиденция в Санкт-Петербурге, посвящённая изучению игровых практик — от народных забав до видеоигр. Резиденты исследуют игру как метод в искусстве и кураторстве. Приём заявок до 17 сентября.",
+   "ru_access": "с оговорками",
+   "ru_note": "нужно очное участие в Петербурге за свой счёт",
+   "source": "ewert.ru + t.me/gdeart",
+   "source_url": "https://ewert.ru/competitions/rezidencziya-pesochnicza-v-biblioteke-shkaf-sankt-peterburg/",
+   "sources": [
+    "ewert.ru",
+    "t.me/gdeart"
+   ],
+   "summary": "Двухмесячная исследовательская резиденция об игровых практиках — от народных забав до видеоигр. Художники и кураторы работают группами, итог — мини-выставки в залах библиотеки. Участие бесплатное, проезд и проживание не оплачиваются.",
    "techniques": "без ограничений по медиуму",
-   "theme": "Игровые практики в искусстве",
-   "title": "Резиденция «Песочница» в библиотеке и арт-резиденции «ШКАФ»",
-   "who": "художники, кураторы"
+   "theme": "Игра как форма коммуникации",
+   "title": "Резиденция «Песочница» в библиотеке «ШКАФ»",
+   "who": "художники и кураторы"
   },
   "https://therails.cc/threadresidence": {
    "aliases": [
@@ -5407,6 +5489,7 @@
   "https://t.me/gdeart/1798": "реклама",
   "https://t.me/gdeart/1801": "реклама",
   "https://t.me/gdeart/1804": "реклама",
+  "https://t.me/gdeart/1806": "реклама",
   "https://vsekonkursy.ru/ambassadory-fonda-zhivaya-klassika.html": "не про искусство",
   "https://vsekonkursy.ru/grafik-shkolnogo-etapa-vserossijskoj-olimpiady-shkolnikov.html": "детский конкурс",
   "https://vsekonkursy.ru/grantovyj-konkurs-novye-iskateli-2026.html": "не про искусство",
@@ -5436,6 +5519,7 @@
   "https://vsekonkursy.ru/natsionalnaya-ekologicheskaya-premiya-kp.html": "не про искусство",
   "https://vsekonkursy.ru/obrazovatelnaya-programma-sirius-algoritmy-i-analiz-dannyh.html": "детский конкурс",
   "https://vsekonkursy.ru/open-koll-dlya-professionalnyh-tantsovshhikov-horeografov-i-performerov-predchuvstvie-otsrochennoe-vremya.html": "медиум исключён",
+  "https://vsekonkursy.ru/shkola-yunogo-lidera-mgu-na-2026-2027-uchebnyj-god.html": "не про искусство",
   "https://vsekonkursy.ru/studencheskij-konkurs-zhurnalistskogo-masterstva-argonavty.html": "не про искусство",
   "https://vsekonkursy.ru/vserossijskaya-olimpiada-shkolnikov-vysshaya-proba-2.html": "детский конкурс",
   "seed:ad-1": "реклама",
