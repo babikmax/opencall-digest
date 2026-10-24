@@ -955,6 +955,12 @@
    "who": "Художники, международный приём"
   },
   "https://artplay.ru/event/artplay-zapuskaet-otkritiy-konkurs-na-sozdanie-visualnoy-dominanty": {
+   "aliases": [
+    "https://artplay.ru/event/artplay-zapuskaet-otkritiy-konkurs-na-sozdanie-visualnoy-dominanty",
+    "https://hsedesign.ru/competition/21652dcdf8cf4077909a6c4a5bc379be",
+    "https://t.me/gdeart/1813",
+    "https://t.me/gdeart/1827"
+   ],
    "apply_url": "https://artplay.ru/event/artplay-zapuskaet-otkritiy-konkurs-na-sozdanie-visualnoy-dominanty",
    "city": "Москва",
    "contact": "",
@@ -970,6 +976,9 @@
    "ru_note": "российский организатор",
    "source": "t.me/gdeart",
    "source_url": "https://t.me/gdeart/1813",
+   "sources": [
+    "t.me/gdeart"
+   ],
    "summary": "Центр ARTPLAY объявил открытый конкурс на создание арт-объекта — визуальной доминанты перед главным входом с набережной Яузы. Работа должна вписываться в архитектурный ландшафт и соответствовать философии площадки. Победивший проект станет визитной карточкой Центра.",
    "techniques": "Арт-объект, паблик-арт, без строгих ограничений по медиуму",
    "theme": "Арт-объект перед входом в центр дизайна",
@@ -11049,6 +11058,7 @@
   "https://vsekonkursy.ru/konkurs-videorolikov-snyato-s-yazyka-2.html": "детский конкурс",
   "https://vsekonkursy.ru/konkurs-ya-uchastvuyu-v-agrontri.html": "детский конкурс",
   "https://vsekonkursy.ru/konkurs-yunyh-dizajnerov-futbolka-prevrashhaetsya.html": "детский конкурс",
+  "https://vsekonkursy.ru/konkurs-yunyj-upravdom-sozidatel-blagopriyatnoj-sredy-prozhivaniya-2.html": "детский конкурс",
   "https://vsekonkursy.ru/konkurs-znaesh-nauchi-3.html": "детский конкурс",
   "https://vsekonkursy.ru/konkursy-sentyabrya-6.html": "нет приёма заявок",
   "https://vsekonkursy.ru/literaturnyj-konkurs-knigus-chitaet.html": "медиум исключён",
